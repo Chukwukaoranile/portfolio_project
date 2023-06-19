@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Donate{% endblock %}
+{% block content %}
+  <h1>Donate</h1>
+  <p>Thank you for considering a donation!</p>
+  <p>Your contribution helps us continue providing valuable services.</p>
+  <form method="POST" action="/donate">
+    <div class="form-group">
+      <label for="amount">Donation Amount:</label>
+      <input
+        type="number"
+        class="form-control"
+        id="amount"
+        name="amount"
+        placeholder="Enter the donation amount"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter your email address"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Donate</button>
+  </form>
+{% endblock %}
