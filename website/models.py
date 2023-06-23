@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     notes = db.relationship('Note')
 
 
-
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
@@ -26,3 +25,16 @@ class BlogPost(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User')
+
+class Contact(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(150))
+    message = db.Column(db.Text)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+
+    def __init__(self, name, email, message):
+        self.name = name
+        self.email = email
+        self.message = message
+
