@@ -1,15 +1,13 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db   ##means from __init__.py import db
+from . import db, mail   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_mail import Message
-from flask_mail import Mail
 
 
 auth = Blueprint('auth', __name__)
 
-mail = Mail()
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -77,7 +75,7 @@ def contact():
         message = request.form.get('message')
 
         # Send email
-        send_email(name, email, message)
+        send_email(mail, name, email, message)
 
         # Store in database
         save_contact(name, email, message)
@@ -85,8 +83,8 @@ def contact():
         return "Thank you for contacting us! We will get back to you soon."
 
     return render_template('views.contact')
-def send_email(name, email, message):
-    msg = Message("Contact Form Submission", sender=email, recipients=["winbit30@gmail.com"])
+def send_email(mail, name, email, message):
+    msg = Message("Contact Form Submission", sender=email, recipients=["chika@chukwukaoranile.tech"])
     msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
     mail.send(msg)
 

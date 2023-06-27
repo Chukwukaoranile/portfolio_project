@@ -2,12 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-
-
 from flask_mail import Mail
 
 app = Flask(__name__)
 # Other app configurations...
+
+app.config['MAIL_SERVER'] = 'smtp.chukwukaoranile.tech'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'chika@chukwukaoranile.tech'
+app.config['MAIL_PASSWORD'] = 'psnmumW8'
 
 # Initialize the mail instance
 mail = Mail(app)

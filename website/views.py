@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
-from . import db
+from . import db, mail
 import json
 from flask_mail import Message
 from flask_mail import Mail
@@ -9,7 +9,7 @@ from flask_mail import Mail
 views = Blueprint('views', __name__)
 mail = Mail()
 
-
+77
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
@@ -50,7 +50,7 @@ def contact():
         message = request.form.get('message')
 
         # Send email
-        send_email(name, email, message)
+        send_email(mail, name, email, message)
 
         # Store in database
         save_contact(name, email, message)
@@ -59,8 +59,8 @@ def contact():
 
     return render_template('contact.html', user=current_user)
 
-def send_email(name, email, message):
-    msg = Message("Contact Form Submission", sender=email, recipients=["winbit30@gmail.com"])
+def send_email(mail, name, email, message):
+    msg = Message("Contact Form Submission", sender=email, recipients=["chika@chukwukaoranile.tech"])
     msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
     mail.send(msg)
 
